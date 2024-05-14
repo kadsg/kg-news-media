@@ -58,14 +58,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/user',
+    path: '/news/post',
     component: Layout,
-    redirect: '/user',
+    redirect: '/news/post',
     children: [{
-      path: '/user',
-      name: 'User',
-      component: () => import('@/views/management/user/index.vue'),
-      meta: { title: '我的粉丝', icon: 'el-icon-s-custom' }
+      path: '/news/post',
+      name: 'Post',
+      component: () => import('@/views/create/create.vue'),
+      meta: { title: '新闻发布', icon: 'el-icon-s-promotion' }
     }]
   },
 
@@ -82,6 +82,18 @@ export const constantRoutes = [
   },
 
   {
+    path: '/fans',
+    component: Layout,
+    redirect: '/fans',
+    children: [{
+      path: '/fans',
+      name: 'Fans',
+      component: () => import('@/views/fans/index'),
+      meta: { title: '我的粉丝', icon: 'el-icon-s-flag' }
+    }]
+  },
+
+  {
     path: '/account',
     component: Layout,
     redirect: '/account',
@@ -89,7 +101,7 @@ export const constantRoutes = [
       path: '/account',
       name: 'Account',
       component: () => import('@/views/center/index'),
-      meta: { title: '个人中心', icon: 'user' }
+      meta: { title: '我的账号', icon: 'user' }
     }]
   },
 

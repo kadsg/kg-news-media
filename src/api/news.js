@@ -17,3 +17,12 @@ export function getDetail(newsId) {
     params: { newsId }
   })
 }
+
+// 发布新闻
+export function post(data) {
+  return request({
+    url: '/news/post',
+    method: 'post',
+    data
+  })
+}
