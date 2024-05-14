@@ -159,10 +159,12 @@ export default {
       const title = 'Edit Article'
       document.title = `${title} - ${this.postForm.id}`
     },
+    removeHtmlTags(content) {
+      return content.replace(/&<[^>]*>?/gm, '');
+    },
     submitForm() {
       this.postForm.cover = this.postForm.image_uri
-      // 去除this.postForm.content中的所有<xxx>标签
-      this.postForm.content = this.postForm.content.replace(/<p>/, '').replace(/<\/p>/, '')
+      this.postForm.content = this.removeHtmlTags(this.postForm.content);
       if (this.postForm.tagId === undefined) {
         this.$message({
           message: '请选择标签',
