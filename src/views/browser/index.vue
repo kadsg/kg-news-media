@@ -7,7 +7,7 @@
       </el-tab-pane>
 
       <!--   这里是新闻卡片   -->
-      <el-card class="box-card" style="margin-bottom: 15px" v-for="news in newsList">
+      <el-card class="box-card" style="margin-bottom: 15px" v-for="news in newsList" :shadow="'hover'">
         <el-row>
           <el-col :span="12">
             <div class="text item">
