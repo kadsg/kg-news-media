@@ -51,3 +51,12 @@ export function dislikeNews(newsId) {
   })
 }
 
+// 获取收藏新闻列表
+export function getFavoriteList(data) {
+  return request({
+    url: '/news/favorite',
+    method: 'post',
+    data
+  })
+}
+

@@ -70,6 +70,18 @@ export const constantRoutes = [
   },
 
   {
+    path: '/favorite',
+    component: Layout,
+    redirect: '/favorite',
+    children: [{
+      path: '/favorite',
+      name: 'Favorite',
+      component: () => import('@/views/favorite/index'),
+      meta: { title: '我的收藏', icon: 'el-icon-star-on' }
+    }]
+  },
+
+  {
     path: '/account',
     component: Layout,
     redirect: '/account',

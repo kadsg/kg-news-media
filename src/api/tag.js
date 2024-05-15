@@ -43,3 +43,11 @@ export function updateNewsTag(data) {
   })
 }
 
+// 获取用户收藏的新闻的所属标签
+export function getFavoriteNewsTags(id) {
+  return request({
+    url: '/newsTag/favorite/' + id,
+    method: 'get'
+  })
+}
+
