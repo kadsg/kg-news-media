@@ -7,7 +7,7 @@
       </el-tab-pane>
 
       <!--   这里是新闻卡片   -->
-      <el-card class="box-card" style="margin-bottom: 15px" v-for="news in newsList" :shadow="'hover'">
+      <el-card class="box-card" style="margin-bottom: 15px" v-for="news in newsList" :shadow="'hover'" @click.native="jumpToDetail(news.newsId)">
         <el-row>
           <el-col :span="12">
             <div class="text item">
@@ -29,7 +29,6 @@
           </el-col>
         </el-row>
       </el-card>
-
 
     </el-tabs>
   </div>
@@ -86,6 +85,10 @@ export default {
       getList(this.newsListQuery).then(res => {
         this.newsList = res.data.list
       })
+    },
+    jumpToDetail(newsId) {
+      console.log(newsId)
+      this.$router.push({name: 'Detail', params: {id: newsId}})
     }
   }
 };

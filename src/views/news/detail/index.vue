@@ -6,7 +6,7 @@
         <span style="margin-right: 15px"><el-link type="primary">{{ detail.mediaName }}</el-link></span>
         <span style="margin-right: 15px"><el-tag type="danger">浏览量 {{ detail.viewCount }}</el-tag></span>
         <span style="margin-right: 15px"><el-tag type="success">评论数{{ detail.commentCount }}</el-tag></span>
-        <span style="margin-right: 15px"><el-tag type="primary">点赞数{{ detail.likeCount }}</el-tag></span>
+        <span style="margin-right: 15px"><el-tag type="primary">收藏数{{ detail.likeCount }}</el-tag></span>
         <el-button @click="drawer = true; getCommentList()" type="primary" style="margin-left: 16px;">
             查看评论
         </el-button>
@@ -72,7 +72,7 @@
                     <el-button v-if="comment.likeStatus===true" class="el-icon-arrow-up" type="text" size="mini" @click="handleLike(comment.commentId)">已点赞 {{ comment.likeCount }}</el-button>
                     <el-button v-if="comment.dislikeStatus===false"  class="el-icon-arrow-down" type="text" size="mini" @click="handleDislike(comment.commentId)">踩 {{ comment.unlikeCount }}</el-button>
                     <el-button v-if="comment.dislikeStatus===true"  class="el-icon-arrow-down" type="text" size="mini" @click="handleDislike(comment.commentId)">已踩 {{ comment.unlikeCount }}</el-button>
-                     <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="deleteComment(comment.commentId)">删除</el-button>
+                      <el-button v-if="comment.authorId === $store.getters.id" type="danger" size="mini" icon="el-icon-delete" circle @click="deleteComment(comment.commentId)">删除</el-button>
                   </span>
                   </el-card>
                 </el-timeline-item>
@@ -99,7 +99,7 @@
                             currentComment.children=comment.children;
                             currentComment.commentId=comment.commentId;
                            openSubComment(currentComment.authorName, currentComment.children)">回复 {{ comment.children.length }}</el-button>
-                <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="deleteComment(comment.commentId)">删除</el-button>
+                <el-button v-if="comment.authorId === $store.getters.id" type="danger" size="mini" icon="el-icon-delete" circle @click="deleteComment(comment.commentId)">删除</el-button>
               </span>
             </el-card>
           </el-timeline-item>

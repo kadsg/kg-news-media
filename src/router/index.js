@@ -80,20 +80,6 @@ export const constantRoutes = [
       meta: { title: '我的账号', icon: 'user' }
     }]
   },
-  //
-  // {
-  //   path: '/summary/:id',
-  //   component: Layout,
-  //   redirect: '/summary/:id',
-  //   children: [
-  //     {
-  //       path: '/summary/:id',
-  //       name: 'Summary',
-  //       component: Summary,
-  //       hidden: true
-  //     }
-  //   ]
-  // },
 
   {
     path: '/detail/:id',
