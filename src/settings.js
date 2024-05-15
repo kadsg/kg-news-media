@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'kg-news media',
+  title: 'kg-news user',
 
   /**
    * @type {boolean} true | false

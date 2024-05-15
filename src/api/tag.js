@@ -43,10 +43,3 @@ export function updateNewsTag(data) {
   })
 }
 
-// 获取用户发布的新闻的所属标签
-export function getPublishedNewsTags(id) {
-  return request({
-    url: '/newsTag/published/' + id,
-    method: 'get'
-  })
-}

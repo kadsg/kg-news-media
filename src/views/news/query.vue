@@ -93,9 +93,6 @@
           <el-button type="primary" size="mini" @click="jumpToDetail(row.newsId)">
             查看文章
           </el-button>
-          <el-button type="danger" size="mini">
-            删除文章
-          </el-button>
         </template>
       </el-table-column>
 
@@ -107,7 +104,7 @@
 
 <script>
 
-import { getPublishedNewsTags } from '@/api/tag'
+import { queryNewsTag } from '@/api/tag'
 import { getList } from '@/api/news'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -135,6 +132,7 @@ export default {
       value: '',
       tagListQuery: {
         newsId: '',
+        mediaId: '',
         newsTagId: '',
         title: '',
       },
@@ -143,22 +141,21 @@ export default {
         pageSize: 10,
         newsId: '',
         title: '',
-        newsTagId: '',
-        mediaId: this.$store.getters.id
+        newsTagId: ''
       },
       newsSummaryList: []
     }
   },
   async created() {
-    await this.getOwnList()
+    await this.getList()
     this.listLoading = false
   },
   methods: {
     // 获取标签列表
-    async getOwnList() {
+    async getList() {
       this.listLoading = true
-      const response = await getPublishedNewsTags(this.$store.getters.id)
-      const tempList = response.data
+      const response = await queryNewsTag(this.tagListQuery)
+      const tempList = response.data.list
       tempList.forEach(item => {
         this.tagOptions.push({
           tagId: item.tagId,

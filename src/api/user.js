@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 登录接口
 export function login(data) {
   return request({
-    url: '/admin/login',
+    url: '/user/login',
     method: 'post',
     data
   })
@@ -18,7 +18,7 @@ export function getInfo(userId) {
 
 export function logout() {
   return request({
-    url: '/admin/logout',
+    url: '/user/logout',
     method: 'post'
   })
 }

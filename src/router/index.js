@@ -48,36 +48,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/browser',
     children: [{
-      path: 'dashboard',
-      name: '首页',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
-  },
-
-  {
-    path: '/news/post',
-    component: Layout,
-    redirect: '/news/post',
-    children: [{
-      path: '/news/post',
-      name: 'Post',
-      component: () => import('@/views/create/create.vue'),
-      meta: { title: '新闻发布', icon: 'el-icon-s-promotion' }
-    }]
-  },
-
-  {
-    path: '/news/published',
-    component: Layout,
-    redirect: '/news/published',
-    children: [{
-      path: '/news/published',
-      name: 'NewsPublished',
-      component: () => import('@/views/news/query.vue'),
-      meta: { title: '我的发布', icon: 'el-icon-news' }
+      path: 'browser',
+      name: '新闻浏览',
+      component: () => import('@/views/browser/index'),
+      meta: { title: '新闻浏览', icon: 'dashboard' }
     }]
   },
 
@@ -104,20 +80,20 @@ export const constantRoutes = [
       meta: { title: '我的账号', icon: 'user' }
     }]
   },
-
-  {
-    path: '/summary/:id',
-    component: Layout,
-    redirect: '/summary/:id',
-    children: [
-      {
-        path: '/summary/:id',
-        name: 'Summary',
-        component: Summary,
-        hidden: true
-      }
-    ]
-  },
+  //
+  // {
+  //   path: '/summary/:id',
+  //   component: Layout,
+  //   redirect: '/summary/:id',
+  //   children: [
+  //     {
+  //       path: '/summary/:id',
+  //       name: 'Summary',
+  //       component: Summary,
+  //       hidden: true
+  //     }
+  //   ]
+  // },
 
   {
     path: '/detail/:id',
@@ -131,6 +107,18 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+
+  {
+    path: '/news/query',
+    component: Layout,
+    redirect: '/news/query',
+    children: [{
+      path: '/news/query',
+      name: 'NewsQuery',
+      component: () => import('@/views/news/query.vue'),
+      meta: { title: '新闻检索', icon: 'el-icon-search' }
+    }]
   },
 
   {

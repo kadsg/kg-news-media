@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 const getDefaultState = () => {
   return {
     // eslint-disable-next-line no-undef
-    id: Cookies.get('vue_admin_template_id_media') || '',
+    id: Cookies.get('vue_admin_template_id_user') || '',
     token: getToken(),
     username: '',
     nickname: '',
@@ -70,7 +70,7 @@ const actions = {
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         // eslint-disable-next-line no-undef
-        Cookies.set('vue_admin_template_id_media', data.id) // 保存id到Cookies
+        Cookies.set('vue_admin_template_id_user', data.id) // 保存id到Cookies
         resolve()
       }).catch(error => {
         reject(error)
@@ -116,7 +116,7 @@ const actions = {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
         // eslint-disable-next-line no-undef
-        Cookies.remove('vue_admin_template_id_media')
+        Cookies.remove('vue_admin_template_id_user')
         resetRouter()
         commit('RESET_STATE')
         resolve()

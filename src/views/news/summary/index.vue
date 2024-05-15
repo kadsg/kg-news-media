@@ -72,7 +72,7 @@
           <el-button type="primary" size="mini" @click="jumpToDetail(row.newsId)">
             查看文章
           </el-button>
-          <el-button type="danger" size="mini">
+          <el-button type="danger" size="mini" @click="deleteNews(row.newsId)">
             删除文章
           </el-button>
         </template>
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/news'
+import { getList, deleteNews } from '@/api/news'
 import Pagination from '@/components/Pagination/index.vue'
 
 export default {
@@ -126,6 +126,26 @@ export default {
     jumpToDetail(newsId) {
       console.log(newsId)
       this.$router.push({ name: 'Detail', params: { id: newsId }})
+    },
+    deleteNews(newsId) {
+      this.$confirm('此操作将永久删除该新闻, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+      deleteNews(newsId).then(() => {
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        })
+        this.getList()
+      })
+    }).catch(() => {
+      this.$message({
+        type: 'info',
+        message: '已取消删除'
+      })
+    })
     }
   }
 }
