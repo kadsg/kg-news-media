@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="fansListQuery.fansId" placeholder="用户ID" style="width: 200px; margin-right: 20px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="fansListQuery.nickname" placeholder="昵称" style="width: 200px; margin-right: 20px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="followListQuery.followId" placeholder="用户ID" style="width: 200px; margin-right: 20px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="followListQuery.nickname" placeholder="昵称" style="width: 200px; margin-right: 20px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
@@ -13,7 +13,7 @@
       <br>
     </div>
 
-    <el-table :data="fansList" border fit highlight-current-row style="width: 100%">
+    <el-table :data="followList" border fit highlight-current-row style="width: 100%">
       <el-table-column
         v-loading="listLoading"
         align="center"
@@ -52,7 +52,7 @@
 
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="fansListQuery.pageNum" :limit.sync="fansListQuery.pageSize" @pagination="query" />
+    <pagination v-show="total>0" :total="total" :page.sync="followListQuery.pageNum" :limit.sync="followListQuery.pageSize" @pagination="query" />
 
   </div>
 </template>
@@ -62,10 +62,10 @@
 import { updateInfo } from '@/api/user'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination'
-import { getFansList } from '@/api/fans'
+import { getFollowList } from '@/api/follow'
 
 export default {
-  name: 'FansQuery',
+  name: 'FollowQuery',
   components: { Pagination },
   directives: { waves },
   filters: {
@@ -87,14 +87,14 @@ export default {
       listLoading: true,
       value: '',
       roleOptions: [],
-      fansListQuery: {
+      followListQuery: {
         pageNum: 1,
         pageSize: 10,
         userId: '',
-        fansId: '',
+        followId: '',
         nickname: '',
       },
-      fansList: [],
+      followList: [],
       userInfo: {
         id: '',
         nickname: '',
@@ -115,11 +115,12 @@ export default {
   methods: {
     // 获取粉丝列表
     query() {
-      this.fansListQuery.userId = this.$store.getters.id
-      getFansList(this.fansListQuery).then(response => {
-        this.fansList = response.data.list
+      this.followListQuery.userId = this.$store.getters.id
+      console.log(this.followListQuery)
+      getFollowList(this.followListQuery).then(response => {
+        this.followList = response.data.list
         this.total = response.data.total
-        console.log(this.fansList)
+        console.log(this.followList)
         // 消息提示
         this.$message({
           message: '查询成功',

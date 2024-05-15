@@ -17,6 +17,21 @@
       <div style="margin-top: 30px">
         <el-divider content-position="right">本文发布于{{ detail.createTime }}</el-divider>
       </div>
+        <el-row>
+          <div style="position: absolute; bottom: 0;">
+            <el-button v-if="detail.likeStatus === false" style="margin-right: 32px" class="el-icon-star-off" @click="handleNewsLike">
+            收藏 {{ detail.likeCount }}
+            </el-button>
+            <el-button v-if="detail.likeStatus === true" style="margin-right: 32px" class="el-icon-star-off" @click="handleNewsLike">
+              取消收藏 {{ detail.likeCount }}
+            </el-button>
+            <el-button v-if="detail.dislikeStatus === false" style="margin-right: 32px" class="el-icon-arrow-down"  @click="handleNewsDislike">
+              踩 {{ detail.unlikeCount }}
+            </el-button>
+            <el-button v-if="detail.dislikeStatus === true" style="margin-right: 32px" class="el-icon-arrow-down"  @click="handleNewsDislike">
+              已踩 {{ detail.unlikeCount }}
+            </el-button>          </div>
+        </el-row>
     </el-card>
 
     <!--  评论区整体  -->
@@ -111,7 +126,7 @@
 </template>
 
 <script>
-import { getDetail } from '@/api/news'
+import { dislikeNews, getDetail, getNewsLikeStatus, likeNews } from '@/api/news'
 import { getNewsCommentList, saveComment, deleteComment, getCommentLikeStatus, likeComment, dislikeComment } from '@/api/comment'
 
 export default {
@@ -156,6 +171,28 @@ export default {
     getDetail() {
       getDetail(this.id).then(response => {
         this.detail = response.data
+        getNewsLikeStatus(this.id).then(response => {
+          this.$set(this.detail, 'likeStatus', response.data.likeStatus)
+          this.$set(this.detail, 'dislikeStatus', response.data.dislikeStatus)
+        })
+      })
+    },
+    handleNewsLike() {
+      likeNews(this.id).then(() => {
+        this.$message({
+          message: '成功',
+          type: 'success'
+        })
+        this.getDetail()
+      })
+    },
+    handleNewsDislike() {
+      dislikeNews(this.id).then(() => {
+        this.$message({
+          message: '成功',
+          type: 'success'
+        })
+        this.getDetail()
       })
     },
     getCommentList() {

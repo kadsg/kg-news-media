@@ -162,6 +162,7 @@ export default {
           tagName: item.tagName,
           deleteFlag: item.deleteFlag
         })
+        this.listLoading = false
       })
       setTimeout(() => {
         this.listLoading = false

@@ -26,3 +26,28 @@ export function post(data) {
     data
   })
 }
+
+// 获取新闻收藏状态
+export function getNewsLikeStatus(newsId) {
+  return request({
+    url: '/news/like/status/' + newsId,
+    method: 'get'
+  })
+}
+
+// 收藏新闻
+export function likeNews(newsId) {
+  return request({
+    url: '/news/like/' + newsId,
+    method: 'put'
+  })
+}
+
+// 踩新闻
+export function dislikeNews(newsId) {
+  return request({
+    url: '/news/dislike/' + newsId,
+    method: 'put'
+  })
+}
+

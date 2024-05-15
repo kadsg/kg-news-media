@@ -58,14 +58,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/fans',
+    path: '/follow',
     component: Layout,
-    redirect: '/fans',
+    redirect: '/follow',
     children: [{
-      path: '/fans',
-      name: 'Fans',
-      component: () => import('@/views/fans/index'),
-      meta: { title: '我的粉丝', icon: 'el-icon-s-flag' }
+      path: '/follow',
+      name: 'Follow',
+      component: () => import('@/views/follow/index'),
+      meta: { title: '我的关注', icon: 'el-icon-s-flag' }
     }]
   },
 

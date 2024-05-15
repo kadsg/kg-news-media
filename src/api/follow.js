@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getFansList(data) {
+export function getFollowList(data) {
   return request({
-    url: `/fans/list`,
+    url: `/follow/list`,
     method: 'post',
     data
   })
