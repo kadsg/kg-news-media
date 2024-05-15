@@ -60,3 +60,10 @@ export function getFavoriteList(data) {
   })
 }
 
+// 获取推荐新闻列表
+export function getRecommendList(userId) {
+  return request({
+    url: '/news/recommend/' + userId
+  })
+}
+
