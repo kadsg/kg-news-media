@@ -21,82 +21,35 @@
       <br>
     </div>
 
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="newsSummaryList"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%;"
-      @sort-change="sortChange"
-    >
-      <el-table-column label="ID" prop="newsId" align="center" width="80">
-        <template slot-scope="{row}">
-          <span>{{ row.newsId }}</span>
-        </template>
-      </el-table-column>
+    <div v-if="newsSummaryList.length > 0">
+      <!--   这里是新闻卡片   -->
+      <el-card class="box-card" style="margin-bottom: 15px"  v-for="news in newsSummaryList" :shadow="'hover'" @click.native="jumpToDetail(news.newsId)">
+        <el-row>
+          <el-col :span="12">
+            <div class="text item">
+              <h2>{{ news.title }}</h2>
+            </div>
+            <div style="position: absolute; bottom: 0;">
+              <i style="margin-right: 32px" class="el-icon-user-solid">来自 {{ news.mediaName }}</i>
+              <i style="margin-right: 32px" class="el-icon-time">发布于 {{ news.postTime }}</i>
+              <i style="margin-right: 32px" class="el-icon-star-off">收藏 {{ news.likeCount }}</i>
+              <i style="margin-right: 32px" class="el-icon-arrow-down">踩 {{ news.unlikeCount }}</i>
+              <i style="margin-right: 32px" class="el-icon-search">浏览 {{ news.viewCount }}</i>
+              <i style="margin-right: 32px" class="el-icon-chat-dot-round">评论 {{ news.commentCount }}</i>
+            </div>
+          </el-col>
+          <el-col :span="12"></el-col>
+          <el-col :span="12">
+            <!-- 这里放图片 -->
+            <img :src="news.cover" class="image" style="width: 180px; height: 180px; float: right">
+          </el-col>
+        </el-row>
+      </el-card>
 
-      <el-table-column label="标题" prop="title" align="center" width="150">
-        <template slot-scope="{row}">
-          <span> {{ row.title }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="新闻封面" prop="cover" align="center" width="130">
-        <template slot-scope="{row}">
-          <el-image
-            style="width: 100px; height: 100px"
-            :src="row.cover"
-            :fit="fit"></el-image>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="浏览量" prop="viewCount" align="center" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.viewCount }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="评论数" prop="commentCount" align="center" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.commentCount }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="点赞量" prop="likeCount" align="center" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.likeCount }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="点踩量" prop="unlikeCount" align="center" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.unlikeCount }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="发布时间" prop="postTime" align="center" width="170">
-        <template slot-scope="{row}">
-          <span>{{ row.postTime }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="发布媒体" prop="mediaName" align="center" width="170">
-        <template slot-scope="{row}">
-          <span>{{ row.mediaName }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="操作" align="center" width="210" class-name="small-padding fixed-width">
-        <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="jumpToDetail(row.newsId)">
-            查看文章
-          </el-button>
-        </template>
-      </el-table-column>
-
-    </el-table>
+    </div>
+    <div class="text item" v-else>
+      <el-empty description="空空如也"></el-empty>
+    </div>
 
     <pagination v-show="total>0" :total="total" :page.sync="newsListQuery.pageNum" :limit.sync="newsListQuery.pageSize" @pagination="getList" />
   </div>

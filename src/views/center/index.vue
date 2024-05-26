@@ -34,13 +34,6 @@
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
-          <i class="el-icon-tickets"></i>
-          账号类型
-        </template>
-        <el-tag size="small">{{ userInfo.roleName }}</el-tag>
-      </el-descriptions-item>
-      <el-descriptions-item>
-        <template slot="label">
           <i class="el-icon-office-building"></i>
           个人描述
         </template>

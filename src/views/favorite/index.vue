@@ -98,6 +98,7 @@ export default {
   },
   async created() {
     await this.getOwnList()
+    this.query()
     this.listLoading = false
   },
   methods: {

@@ -111,9 +111,10 @@ export default {
   },
   async created() {
     this.listLoading = true
+    this.query()
   },
   methods: {
-    // 获取粉丝列表
+    // 获取关注列表
     query() {
       this.followListQuery.userId = this.$store.getters.id
       console.log(this.followListQuery)

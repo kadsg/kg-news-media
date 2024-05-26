@@ -6,8 +6,9 @@
         </span>
       </el-tab-pane>
 
+      <div v-if="newsList.length > 0">
       <!--   这里是新闻卡片   -->
-      <el-card class="box-card" style="margin-bottom: 15px" v-for="news in newsList" :shadow="'hover'" @click.native="jumpToDetail(news.newsId)">
+      <el-card class="box-card" style="margin-bottom: 15px"  v-for="news in newsList" :shadow="'hover'" @click.native="jumpToDetail(news.newsId)">
         <el-row>
           <el-col :span="12">
             <div class="text item">
@@ -29,6 +30,11 @@
           </el-col>
         </el-row>
       </el-card>
+
+      </div>
+      <div class="text item" v-else>
+        <el-empty description="空空如也"></el-empty>
+      </div>
 
     </el-tabs>
   </div>
@@ -56,14 +62,14 @@ export default {
         pageNum: 1,
         pageSize: 1000
       },
-      newsList: []
+      newsList: null
     };
   },
   created() {
     queryNewsTag(this.tagListQuery).then(res => {
       const tempList = res.data.list
       this.tabList.push({
-        id: '',
+        id: 0,
         name: '推荐'
       })
       tempList.forEach(item => {
@@ -74,6 +80,8 @@ export default {
       })
 
     })
+
+    this.getNewsList()
   },
   methods: {
     handleClick(tab) {
